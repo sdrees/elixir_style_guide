@@ -495,9 +495,9 @@ generally preferred practice.
   some_string |> String.trim() |> String.downcase() |> String.codepoints()
   ```
 
-* <a name="parentheses"></a>
+* <a name="fun-def-parentheses"></a>
   Use parentheses when a `def` has arguments, and omit them when it doesn't.
-  <sup>[[link](#parentheses)]</sup>
+  <sup>[[link](#fun-def-parentheses)]</sup>
 
   ```elixir
   # not preferred
@@ -660,15 +660,14 @@ generally preferred practice.
   ```
 
 * <a name="predicate-macro-names-with-guards"></a>
-  The names of predicate macros (compile-time generated functions that return a
-  boolean value) _that can be used within guards_ should be prefixed with `is_`.
+  The name of macros suitable for use in guard expressions should be prefixed
+  with `is_`.
   For a list of allowed expressions, see the [Guard][Guard Expressions] docs.
   <sup>[[link](#predicate-macro-names-with-guards)]</sup>
 
   ```elixir
-  defmacro is_cool(var) do
-    quote do: unquote(var) == "cool"
-  end
+  defguard is_cool(var) when var == "cool"
+  defguardp is_very_cool(var) when var == "very cool"
   ```
 
 * <a name="predicate-macro-names-no-guards"></a>
@@ -1073,10 +1072,14 @@ directives (see [Modules](#modules)).
 
 * <a name="spec-spacing"></a>
   Place specifications right before the function definition,
+  after the `@doc`,
   without separating them by a blank line.
   <sup>[[link](#spec-spacing)]</sup>
 
   ```elixir
+  @doc """
+  Some function description.
+  """
   @spec some_function(term) :: result
   def some_function(some_data) do
     {:ok, some_data}
@@ -1322,7 +1325,7 @@ project.
 [ExDoc]: https://github.com/elixir-lang/ex_doc
 [ExUnit]: https://hexdocs.pm/ex_unit/ExUnit.html
 [French]: https://github.com/ronanboiteau/elixir_style_guide/blob/master/README_frFR.md
-[Guard Expressions]: http://elixir-lang.org/getting-started/case-cond-and-if.html#expressions-in-guard-clauses
+[Guard Expressions]: https://hexdocs.pm/elixir/guards.html#list-of-allowed-expressions
 [Hex]: https://hex.pm/packages
 [Japanese]: https://github.com/kenichirow/elixir_style_guide/blob/master/README-jaJP.md
 [Korean]: https://github.com/marocchino/elixir_style_guide/blob/new-korean/README-koKR.md
